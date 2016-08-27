@@ -32,7 +32,6 @@ namespace PostgreSlave
         bool fileBacup = false;
         public bool createTestTableFlag = false;
         
-
         public MainWindow()
         {
             InitializeComponent();
@@ -54,15 +53,8 @@ namespace PostgreSlave
                     Ping pingSender = new Ping();
                     IPAddress address = IPAddress.Parse(IP);
                     PingReply reply = pingSender.Send(address);
-                    if (reply.Status == IPStatus.Success)
-                    {
-                        
-                    }
-                    else
-                    {
-                        break;//Running_task.Text += "(NO " + checkingIP + ") ";
-                        
-                    }
+                    if (reply.Status == IPStatus.Success) { }
+                    else break;
                 }
                 catch (Exception a)
                 {
@@ -132,7 +124,6 @@ namespace PostgreSlave
             {
                 if (testMaster() == false) break;
             }
-            //MessageBox.Show("Master is down!");
             becameSlaveToMaster();
             Program_State.Text = "Monitor has stopped.";
             DateTime localDate = DateTime.Now;
@@ -200,9 +191,7 @@ namespace PostgreSlave
                     try
                     {
                         ManagementBaseObject setGateway;
-                        ManagementBaseObject newGateway =
-                            objMO.GetMethodParameters("SetGateways");
-
+                        ManagementBaseObject newGateway = objMO.GetMethodParameters("SetGateways");
                         newGateway["DefaultIPGateway"] = new string[] { gateway };
                         newGateway["GatewayCostMetric"] = new int[] { 1 };
 
