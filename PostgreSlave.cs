@@ -164,7 +164,7 @@ namespace PostgreSlave
             string IP = Primary_IP.Text;
             Task.Factory.StartNew(() => reconect(IP));
             while (checkIP(Primary_IP.Text) == true) ;//System.Windows.MessageBox.Show("Primary IP is still busy! Check you network connection.");             
-            System.IO.File.WriteAllText(@"C:\Program Files\PostgreSQL\9.4\data\startmaster", "Go!");
+            System.IO.File.WriteAllText(@"C:\Program Files\PostgreSQL\10\data\startmaster", "Go!");
             Running_task.Text = "Became slave to master...";
             ChangeIPto(Primary_IP.Text, "255.255.255.0");
             Button_Click.IsEnabled = false;
@@ -287,7 +287,7 @@ namespace PostgreSlave
 
         public bool backupSlaveSetting()
         {
-            string directoryPath = @"C:\Program Files\PostgreSQL\9.4\backupSlaveSetting";
+            string directoryPath = @"C:\Program Files\PostgreSQL\10\backupSlaveSetting";
             try
             {
                 if (Directory.Exists(directoryPath))
@@ -298,9 +298,9 @@ namespace PostgreSlave
                 else
                 {
                     DirectoryInfo dir = Directory.CreateDirectory(directoryPath);            
-                    File.Copy(@"C:\Program Files\PostgreSQL\9.4\data\recovery.conf", @"C:\Program Files\PostgreSQL\9.4\backupSlaveSetting\recovery.conf");
-                    File.Copy(@"C:\Program Files\PostgreSQL\9.4\data\postgresql.conf", @"C:\Program Files\PostgreSQL\9.4\backupSlaveSetting\postgresql.conf");
-                    File.Copy(@"C:\Program Files\PostgreSQL\9.4\data\postgresql.auto.conf", @"C:\Program Files\PostgreSQL\9.4\backupSlaveSetting\postgresql.auto.conf");
+                    File.Copy(@"C:\Program Files\PostgreSQL\10\data\recovery.conf", @"C:\Program Files\PostgreSQL\10\backupSlaveSetting\recovery.conf");
+                    File.Copy(@"C:\Program Files\PostgreSQL\10\data\postgresql.conf", @"C:\Program Files\PostgreSQL\10\backupSlaveSetting\postgresql.conf");
+                    File.Copy(@"C:\Program Files\PostgreSQL\10\data\postgresql.auto.conf", @"C:\Program Files\PostgreSQL\10\backupSlaveSetting\postgresql.auto.conf");
                     return true;
                 }
             }
